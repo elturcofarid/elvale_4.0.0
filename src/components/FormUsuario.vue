@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="app-container">
       <h2>Formulario de Captura de Datos</h2>
       <form @submit.prevent="submitForm">        
   
@@ -136,14 +136,59 @@
   
   <style>
   /* Estilos opcionales */
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  label {
-    margin-bottom: 5px;
-  }
-  input, select {
+
+  
+
+  body {
+    background-color: #f0f4f8;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h2, h3 {
+    color: #007BFF;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.app-container {
+  width: 90%;max-width: 400px; /* Ancho máximo en pantallas grandes */
+  margin: 0 auto; /* Centra el formulario horizontalmente */
+  padding: 20px; /* Espaciado interno */
+}
+
+form div {
     margin-bottom: 15px;
-  }
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select, input[type="text"] {
+    padding: 5px;
+    border: 1px solid #007BFF;
+    width: calc(100% - 12px); /* Ajusta el ancho para el padding */
+    border-radius: 4px;
+}
+
+button {
+    background-color: #28A745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838; /* Oscurece el botón al pasar el ratón */
+}
+
+
   </style>

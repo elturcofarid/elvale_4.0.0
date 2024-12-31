@@ -1,5 +1,7 @@
 <!-- src/views/ManageUsers.vue -->
+ 
 <template>
+  <MenuComponent />
     <div>
       <h2>Gestionar Fios</h2>
       <!-- Contenido para gestionar usuarios -->
@@ -13,11 +15,13 @@
 
 
 import DataGrid from '../components/CuentaGrid.vue';
+import MenuComponent from '../components/MenuComponent.vue'
 
   export default {
     name: 'ManageUsers',
     components: {
-    DataGrid // Registrar el componente
+    DataGrid ,
+    MenuComponent
   }
   };
   </script>

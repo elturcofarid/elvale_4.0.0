@@ -22,8 +22,11 @@
        <label for="observaciones">Observaciones:</label>
       <input type="text" v-model="observaciones" id="observaciones" />
 
-        <button @click="selectedItem = null">Cerrar</button>
-        <button @click="saveItem">Guardar Fio</button>
+      <label for="nombre">Nombre cuenta:</label>
+      <input type="text" v-model="nombre" id="nombre" />
+
+        <button @click="selectedItem = null" class="button text-white button-primary">Cerrar</button>
+        <button @click="saveItem" class="button text-white button-primary">Guardar Fio</button>
       </modal>
 
 
@@ -52,6 +55,7 @@
       monto: '',
       observaciones: '',
       montofiao: 0.0,
+      nombre: '',
     };
   },methods: {
       openModal() {
@@ -61,6 +65,7 @@
         this.observaciones = '';
         this.montofiao = 0.0;
         console.log(this.selectedItem);
+        this.nombre = '';
       },
         async saveItem() {
         if (!this.selectedItem) return;
@@ -72,6 +77,7 @@
             montoAprobado: this.monto,
             usuarioGestor: JSON.parse(localStorage.getItem('iug')),
             observaciones: this.observaciones,
+            tipo: this.nombre,
           });
 
           

@@ -1,20 +1,21 @@
 <template>
     <div>
-      <input type="text" v-model="search" placeholder="Buscar..." />
+      <input type="text" v-model="search" placeholder="Buscar..."  class="search-input"  />
       <table>
         <thead>
           <tr>
-            <th>Id</th>
             <th>Nombre</th>
-            <th>Acciones</th>
+            <th>Observaciones</th>
+            <th>Monto Aprobado</th>            
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in paginatedData" :key="item.id">
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
+            <td>{{ item.tipo }}</td>
+            <td>{{ item.observaciones }}</td>
+            <td>{{ item.montoAprobado }}</td>
             <td>
-              <button @click="openModal(item)">Ver Detalles</button>
+              <button @click="openModal(item)" class="button text-white button-primary">Registrar Fio</button>
             </td>
           </tr>
         </tbody>
@@ -29,21 +30,20 @@
       -->
   
       <modal :isOpen="!!selectedItem" @close="selectedItem = null">
-        <h2>Detalles de {{ selectedItem.name }}</h2>
-        <p>ID: {{ selectedItem.id }}</p>
-        <p>Más detalles sobre {{ selectedItem.name }}...</p>
+        <h2>Detalles de la cuenta {{ selectedItem.tipo }}</h2>
         <p>Observaciones: {{ selectedItem.observaciones }}</p>
 
          <!-- Campo de entrada para la nueva descripción -->
       <label for="monto">Monto del fio:</label>
-      <input type="text" v-model="monto" id="monto" @blur="formatCurrency" @focus="removeCurrencyFormat"/>
-
+      <input type="text" v-model="monto" id="monto" @blur="formatCurrency" @focus="removeCurrencyFormat" class="modal-input"/>
+<br>
        <!-- Campo de entrada para la nueva descripción -->
        <label for="observaciones">Observaciones:</label>
-      <input type="text" v-model="observaciones" id="observaciones" />
+      <input type="text" v-model="observaciones" id="observaciones"  class="modal-input"/>
 
-        <button @click="selectedItem = null">Cerrar</button>
-        <button @click="saveItem">Guardar Fio</button>
+      <br>
+        <button @click="selectedItem = null" class="button text-white button-primary">Cerrar</button>
+        <button @click="saveItem" class="button text-white button-primary">Guardar Fio</button>
       </modal>
     </div>
   </template>
@@ -70,7 +70,7 @@
     computed: {
       filteredData() {
         return this.items.filter(item => 
-          item.observaciones.toLowerCase().includes(this.search.toLowerCase())
+          item.observaciones.toLowerCase().includes(this.search.toLowerCase()) || item.tipo.toLowerCase().includes(this.search.toLowerCase())
         );
       },
       totalPages() {
@@ -155,19 +155,64 @@
   
   <style>
   /* Añade tus estilos aquí */
-  table {
-    width: 100%;
+
+  body {
+    background-color: #f0f4f8;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.search-input {
+    padding: 10px;
+    border: 1px solid #007BFF;
+    width: 70%;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 80%;
+    margin-top: 20px;
     border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+h2 {
+    color: #007BFF;
+}
+
+.button {
+    background-color: #28A745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.modal-input {
+    padding: 10px;
+    border: 1px solid #007BFF;
+    border-radius: 4px;
+    width: 30%;
+    margin-bottom: 10px;
+}
+
+.button-primary {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
   
   /* Modal styles */
   </style>
